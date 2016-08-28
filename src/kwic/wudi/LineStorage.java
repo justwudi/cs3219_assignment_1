@@ -1,4 +1,4 @@
-package wudi;
+package kwic.wudi;
 
 import java.util.ArrayList;
 import java.util.Iterator;

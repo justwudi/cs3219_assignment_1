@@ -1,4 +1,7 @@
-package wudi;
+package kwic.wudi;
+
+import kwic.IOProcessingException;
+import kwic.KWICGenerator;
 
 import java.util.HashSet;
 
@@ -7,7 +10,7 @@ import java.util.HashSet;
  *
  * This is implemented with the Abstract Data Types architecture.
  */
-public class ADTController {
+public class ADTController implements KWICGenerator {
 
     private static HashSet<String> getIgnoreWords(InputProcessor inputProcessor, String ignoreWordsFilePath) throws IOProcessingException {
         HashSet<String> ignoredWords = new HashSet<>();

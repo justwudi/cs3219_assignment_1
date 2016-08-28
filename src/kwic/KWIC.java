@@ -1,9 +1,26 @@
-import wudi.ADTController;
+package kwic;
+
+import kwic.wudi.ADTController;
+import kwic.zhengyi.SubroutineController;
 
 /**
- * Created by WD on 29/8/16.
+ * Key Word In Context
  */
 public class KWIC {
+
+    private static KWICArchitecture getArchitecture(ArgParser.ParsedArguments parsedArguments) {
+        KWICArchitecture architecture = KWICArchitecture.ADT;
+
+        if (parsedArguments.hasArgument("architecture")) {
+            String argument = parsedArguments.getArgument("architecture");
+
+            if (argument.equalsIgnoreCase("subroutine")) {
+                architecture = KWICArchitecture.SUBROUTINE;
+            }
+        }
+
+        return architecture;
+    }
 
     private static String getInputPath(ArgParser.ParsedArguments parsedArguments) {
         return parsedArguments.getArgument("input");
@@ -31,6 +48,7 @@ public class KWIC {
 
     public static void main(String[] args) {
         ArgParser parser = new ArgParser();
+        parser.registerArgument("architecture", "a", false, 1, "type of architecture, i.e. adt, subroutine");
         parser.registerArgument("input", "i", true, 1, "path of input file");
         parser.registerArgument("output", "o", false, 1, "path of output file");
         parser.registerArgument("ignore", "g", false, 1, "path of words-to-ignore file");
@@ -39,8 +57,20 @@ public class KWIC {
         String inputFilePath = getInputPath(parsedArguments);
         String outputFilePath = getOutputPath(parsedArguments);
         String ignoreWordsFilePath = getIgnoredWordsPath(parsedArguments);
+        KWICArchitecture architecture = getArchitecture(parsedArguments);
+        KWICGenerator generator;
 
-        ADTController adtController = new ADTController();
-        adtController.generateKWIC(inputFilePath, outputFilePath, ignoreWordsFilePath);
+        switch (architecture) {
+            case ADT:
+                generator = new ADTController();
+                break;
+            case SUBROUTINE:
+                generator = new SubroutineController();
+                break;
+            default:
+                generator = new ADTController();
+        }
+
+        generator.generateKWIC(inputFilePath, outputFilePath, ignoreWordsFilePath);
     }
 }

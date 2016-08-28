@@ -1,3 +1,5 @@
+package kwic;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -136,9 +138,7 @@ class ArgParser {
         }
 
         if (!isValid) {
-            for (String error : errors) {
-                System.out.println(error);
-            }
+            errors.forEach(System.out::println);
             System.exit(1);
         }
 

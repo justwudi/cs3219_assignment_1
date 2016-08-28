@@ -1,4 +1,6 @@
-package wudi;
+package kwic.wudi;
+
+import kwic.IOProcessingException;
 
 import java.io.File;
 import java.io.FileWriter;

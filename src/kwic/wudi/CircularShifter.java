@@ -1,4 +1,4 @@
-package wudi;
+package kwic.wudi;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
  */
 class CircularShifter {
 
-    private String SINGLE_WHITESPACE = " ";
+    private final String SINGLE_WHITESPACE = " ";
 
     private ArrayList<String> shiftedLines;
     private StringBuilder stringBuilder = new StringBuilder();
